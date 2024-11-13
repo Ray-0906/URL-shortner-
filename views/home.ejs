@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 2rem;
+            color: #007bff;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        input[type="text"] {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        input[type="submit"] {
+            padding: 0.7rem;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .url-generated {
+            font-size: 1.2rem;
+            color: #28a745;
+            margin-top: 1rem;
+        }
+        .url-history {
+            margin-top: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to URL Shortener</h1>
+
+    <div class="container">
+        <form action="/urls" method="post">
+            <label>Paste URL</label>
+            <input type="text" name="url" placeholder="Enter your URL here" required>
+            <input type="submit" value="Generate Short URL">
+        </form>
+
+        <% if (locals.id) { %>
+            <div class="url-generated">
+                <h2>URL generated: <a href="http://localhost:8000/urls/<%= locals.id %>" target="_blank">http://localhost:8000/urls/<%= locals.id %></a></h2>
+            </div>
+        <% } %>
+
+        <% if (locals.urls) { %>
+            <div class="url-history">
+                <h2>URL History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Short URL</th>
+                            <th>Original URL</th>
+                            <th>Clicks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% locals.urls.forEach((elem, index) => { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><a href="http://localhost:8000/urls/<%= elem.shortId %>" target="_blank"><%= elem.shortId %></a></td>
+                                <td><a href="<%= elem.Ogurl %>" target="_blank"><%= elem.Ogurl %></a></td>
+                                <td><%= elem.visithistory.length %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

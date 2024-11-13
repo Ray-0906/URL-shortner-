@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      /* Reset styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body and Container Styling */
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f3f4f6;
+      }
+
+      .container {
+        max-width: 400px;
+        width: 100%;
+        background: #ffffff;
+        padding: 2rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      /* Title Styling */
+      .container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #333333;
+      }
+
+      /* Form Styling */
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      label {
+        font-size: 0.9rem;
+        color: #666666;
+        margin-bottom: 0.3rem;
+        display: block;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      input[type="email"]:focus,
+      input[type="password"]:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+
+      /* Button Styling */
+      button {
+        width: 100%;
+        padding: 0.8rem;
+        background-color: #007bff;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Link Styling */
+      .signup-link {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #666666;
+      }
+
+      .signup-link a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .signup-link a:hover {
+        text-decoration: underline;
+      }
+
+      /* Error Message Styling */
+      .error-message {
+        color: red;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Login</h2>
+      <form action="/user/login" method="POST">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <% if (locals.error) { %>
+          <p class="error-message">Invalid username or password</p>
+        <% } %>
+
+        <button type="submit">Login</button>
+        <p class="signup-link">
+          Don't have an account? <a href="/signup">Sign up here</a>.
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
