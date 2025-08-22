@@ -6,12 +6,14 @@ const StaticRoute = require('./routes/Staticroute');
 const userRoute = require('./routes/user');
 const { chkAuthentication } = require('./middleware/auth');
 const cookieParser = require('cookie-parser');
-
+const {config}=require('dotenv')
+config();   
 const app = express();
-const PORT = 8000;
+const PORT = 3000;
 
 // Database Connection
-const dbURL = 'mongodb://127.0.0.1:27017/url-shortner';
+const dbURL = process.env.DB_URL || 'mongodb://127.0.0.1:27017/urlShortner';
+ console.log(`Connecting to database at ${dbURL}`);
 connectdB(dbURL);
 
 // Middleware

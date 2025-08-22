@@ -1,4 +1,4 @@
-const {getuser}=require('../service/auth')
+ const {getuser}=require('../service/auth')
 
 const chkAuthentication=(req,res,next)=>{
    const token=req.cookies?.uid;

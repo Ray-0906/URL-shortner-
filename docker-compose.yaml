@@ -1,0 +1,28 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_URL=mongodb://mongodb:27017/url-shortner
+    networks:
+      - nodii
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    networks:
+      - nodii
+    volumes:
+      - mongo-data:/data/db   # ✅ must point to /data/db, not /data/
+
+networks:
+  nodii:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
